@@ -8,6 +8,7 @@ import StatusCodes from 'http-status-codes';
 import 'express-async-errors';
 
 import BaseRouter from './routes';
+import helloRouter from './routes/hello';
 import logger from '@shared/Logger';
 
 const app = express();
@@ -58,6 +59,8 @@ app.use(express.static(staticDir));
 app.get('*', (req: Request, res: Response) => {
     res.sendFile('index.html', {root: viewsDir});
 });
+app.set('view engine', 'ejs')
+app.use('/hello', helloRouter)
 
 // Export express instance
 export default app;
